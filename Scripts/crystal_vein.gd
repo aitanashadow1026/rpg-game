@@ -11,8 +11,6 @@ signal vein_harvested(success: bool, tier: String, amount: int)
 @onready var label: Label = $Label
 
 func _ready() -> void:
-	mouse_default_cursor_shape = CURSOR_POINTING_HAND
-	
 	match vein_tier:
 		"ceniza":
 			energy_cost = 1
@@ -52,7 +50,8 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 func _try_harvest() -> void:
 	if not GameState.has_energy(energy_cost):
-		Feedback.show("Sin energía")
+		if has_node("/root/Feedback"):
+			Feedback.message("Sin energía")
 		return
 	
 	var rune_id = _get_rune_for_tier()
@@ -71,8 +70,8 @@ func _on_minigame_result(success: bool, _rune_id: String) -> void:
 		GameState.add_crystal(vein_tier, amount)
 		vein_harvested.emit(true, vein_tier, amount)
 		
-		var tier_name = vein_tier
-		Feedback.show("+" + str(amount) + " " + tier_name)
+		if has_node("/root/Feedback"):
+			Feedback.message("+" + str(amount) + " " + vein_tier)
 		
 		queue_free()
 	else:

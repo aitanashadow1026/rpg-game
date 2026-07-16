@@ -1,6 +1,6 @@
 # feedback.gd
 # Sistema simple de mensajes en pantalla
-# Autoload — usar Feedback.show("texto")
+# Autoload — usar Feedback.message("texto")
 
 extends CanvasLayer
 
@@ -9,12 +9,11 @@ extends CanvasLayer
 func _ready() -> void:
 	label.hide()
 
-func show(text: String, duration: float = 1.5) -> void:
+func message(text: String, duration: float = 1.5) -> void:
 	label.text = text
 	label.modulate = Color(1, 1, 1, 1)
 	label.show()
 	
-	# Animación de fundido
 	var tween = create_tween()
 	tween.tween_property(label, "modulate:a", 1.0, 0.1)
 	tween.tween_interval(duration)
