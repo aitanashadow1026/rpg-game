@@ -4,7 +4,7 @@
 [application]
 config/name="RPG Sin Título"
 config/description="Un RPG por turnos en pixel art"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/forest.tscn"
 config/icon="res://icon.png"
 config/windows_title="RPG Sin Título"
 
@@ -20,6 +20,7 @@ window/size/stretch/aspect="keep"
 [autoload]
 
 GameState="*res://Scripts/game_state.gd"
+Feedback="*res://Scenes/feedback.tscn"
 
 [rendering]
 renderer/rendering_method="gl_compatibility"
