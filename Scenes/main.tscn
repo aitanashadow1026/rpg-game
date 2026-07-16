@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6c7fi07p4i7t"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_vnc7d"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/player.png" id="2_qf6e3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jptkh"]
+size = Vector2(12, 14)
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -2000.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
+color = Color(0.2, 0.25, 0.15, 1.0)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("1_vnc7d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_qf6e3")
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_jptkh")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+anchor_mode = 0
