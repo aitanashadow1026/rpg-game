@@ -21,6 +21,10 @@ func _physics_process(_delta: float) -> void:
 	
 	# Orientar sprite según dirección
 	_update_sprite_direction(input_dir)
+	
+	# Abrir minijuego de runas con E (para pruebas)
+	if Input.is_action_just_pressed("ui_accept"):
+		_open_rune_minigame()
 
 func _update_sprite_direction(input_dir: Vector2) -> void:
 	if input_dir.length() > 0:
@@ -28,3 +32,18 @@ func _update_sprite_direction(input_dir: Vector2) -> void:
 			sprite.flip_h = true
 		elif input_dir.x > 0:
 			sprite.flip_h = false
+
+func _open_rune_minigame() -> void:
+	# Cargar y abrir el minijuego de runas
+	var minigame_scene = load("res://Scenes/rune_minigame.tscn")
+	if minigame_scene:
+		var minigame = minigame_scene.instantiate()
+		add_child(minigame)
+		minigame.setup("arco")
+		minigame.rune_completed.connect(_on_rune_result)
+
+func _on_rune_result(success: bool, _rune_id: String) -> void:
+	if success:
+		print("✅ Runa completada con éxito!")
+	else:
+		print("❌ Runa fallida, se puede reintentar")
