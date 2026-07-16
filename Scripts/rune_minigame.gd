@@ -88,10 +88,10 @@ func _check_accuracy() -> void:
 	var sampled_drawn = _sample_curve(_drawn_points, sample_count)
 	
 	# Calcular error medio
-	var total_error := 0.0
+	var total_error: float = 0.0
 	for i in sample_count:
 		total_error += sampled_ghost[i].distance_to(sampled_drawn[i])
-	var avg_error := total_error / sample_count
+	var avg_error: float = total_error / sample_count
 	
 	var tolerance = _rune_data.get("tolerance", 30.0)
 	
