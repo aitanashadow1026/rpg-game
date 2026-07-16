@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://Scripts/rune_minigame.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2h4xg"]
+bg_color = Color(0.08, 0.08, 0.12, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.4, 0.2, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="RuneMinigame" type="CanvasLayer"]
 layer = 10
@@ -10,8 +22,8 @@ script = ExtResource("1")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.75)
-mouse_filter = 2
+color = Color(0, 0, 0, 0.7)
+mouse_filter = 0
 
 [node name="CenterPanel" type="Control" parent="."]
 anchors_preset = 0
@@ -20,33 +32,42 @@ offset_top = 74
 offset_right = 876
 offset_bottom = 574
 
-[node name="RuneName" type="Label" parent="CenterPanel"]
-anchors_preset = 7
-anchor_left = 0.5
+[node name="TitleFrame" type="ColorRect" parent="CenterPanel"]
+anchors_preset = 0
+offset_left = -8
+offset_top = -24
+offset_right = 600
+offset_bottom = 28
+color = Color(0.12, 0.1, 0.05, 0.8)
+
+[node name="RuneName" type="Label" parent="CenterPanel/TitleFrame"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150
-offset_top = 16
-offset_right = 150
-offset_bottom = 44
+offset_left = 16
+offset_right = -16
 horizontal_alignment = 1
+vertical_alignment = 1
 theme_override_colors/font_color = Color(0.9, 0.85, 0.6, 1)
 theme_override_font_sizes/font_size = 18
 
-[node name="DrawingArea" type="Control" parent="CenterPanel"]
+[node name="DrawingArea" type="ColorRect" parent="CenterPanel"]
 anchors_preset = 0
-offset_left = 100
+offset_left = 125
 offset_top = 60
-offset_right = 400
-offset_bottom = 360
+offset_right = 475
+offset_bottom = 410
+color = Color(0.06, 0.06, 0.1, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxFlat_2h4xg")
 mouse_filter = 0
 
-[node name="GhostLine" type="Line2D" parent="DrawingArea"]
+[node name="GhostLine" type="Line2D" parent="CenterPanel/DrawingArea"]
 width = 2
 default_color = Color(0.8, 0.7, 0.2, 0.35)
 begin_cap_mode = 1
 end_cap_mode = 1
 
-[node name="DrawLine" type="Line2D" parent="DrawingArea"]
+[node name="DrawLine" type="Line2D" parent="CenterPanel/DrawingArea"]
 width = 3
 default_color = Color(0.3, 0.8, 1.0, 1.0)
 begin_cap_mode = 1
@@ -57,9 +78,9 @@ anchors_preset = 7
 anchor_left = 0.5
 anchor_bottom = 1.0
 offset_left = -200
-offset_top = 380
+offset_top = 430
 offset_right = 200
-offset_bottom = 408
+offset_bottom = 458
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 
@@ -68,8 +89,8 @@ anchors_preset = 7
 anchor_left = 0.5
 anchor_bottom = 1.0
 offset_left = -200
-offset_top = 420
+offset_top = 465
 offset_right = 200
-offset_bottom = 460
+offset_bottom = 505
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 16

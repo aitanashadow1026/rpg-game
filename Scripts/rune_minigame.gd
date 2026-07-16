@@ -11,7 +11,7 @@ var _drawing: bool = false
 var _drawn_points: PackedVector2Array = []
 var _ghost_points: PackedVector2Array = []
 
-# Referencias a nodos (se resuelven manualmente en _ready)
+# Referencias
 var _background: ColorRect
 var _rune_name_label: Label
 var _drawing_area: Control
@@ -24,7 +24,7 @@ func setup(rune_id: String) -> void:
 	_rune_data = RuneData.get_rune(rune_id)
 	
 	_rune_name_label.text = _rune_data["name"]
-	_instruction_label.text = "Traza la runa con el ratón"
+	_instruction_label.text = "Mantén clic izquierdo y traza la runa sobre el patrón"
 	_feedback_label.text = ""
 	
 	await get_tree().process_frame
@@ -45,7 +45,7 @@ func _refresh_ghost() -> void:
 		_draw_line.clear_points()
 
 func _ready() -> void:
-	# Resolver nodos manualmente para evitar problemas de ruta
+	# Buscar nodos
 	_background = find_child("Background", true, false)
 	_rune_name_label = find_child("RuneName", true, false)
 	_drawing_area = find_child("DrawingArea", true, false)
@@ -54,15 +54,18 @@ func _ready() -> void:
 	_instruction_label = find_child("Instruction", true, false)
 	_feedback_label = find_child("Feedback", true, false)
 	
-	# Verificar que encontramos todo
 	if not _drawing_area:
 		push_error("RuneMinigame: no se encontró DrawingArea")
 		return
 	if not _ghost_line or not _draw_line:
-		push_error("RuneMinigame: no se encontraron las líneas de dibujo")
+		push_error("RuneMinigame: no se encontraron líneas de dibujo")
 		return
 	
-	# Conectar eventos de dibujo
+	# El fondo absorbe clics para que no pasen al juego
+	if _background:
+		_background.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	# Conectar área de dibujo
 	_drawing_area.gui_input.connect(_on_drawing_input)
 	_drawing_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
