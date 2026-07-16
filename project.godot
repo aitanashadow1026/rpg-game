@@ -17,5 +17,9 @@ window/size/mode=0
 window/size/stretch/mode="canvas_items"
 window/size/stretch/aspect="keep"
 
+[autoload]
+
+GameState="*res://Scripts/game_state.gd"
+
 [rendering]
 renderer/rendering_method="gl_compatibility"
